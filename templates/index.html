@@ -4,52 +4,16 @@
     <title>Sortable Panels</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <style>
-        .panel {
-            border: 1px solid #ccc;
-            margin: 10px;
-            padding: 10px;
-            background-color: #f5f5f5;
-        }
-        .sortable-container {
-            background-color: #f0f0f0; /* Light grey background color */
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .sortable-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .sortable-list li {
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin: 5px;
-            cursor: grab;
-        }
-        
-        /* Style the add button */
-        .add-button {
-            cursor: pointer;
-            text-align: center;
-            border: 1px solid #ccc;
-            padding: 10px;
-            background-color: #f0f0f0; /* Light grey background */
-            color: #333;
-            font-weight: bold;
-            font-size: 20px;
-            user-select: none; /* Prevent text selection */
-        }
-    </style>
+    <link rel="{{ url_for('static', filename='style.css')}}">
 </head>
 <body>
     <div class="container">
-        <h1>DynamoDB Data</h1>
+        <h1>Day Stuff</h1>
         <div class="sortable-container">
             <ul class="sortable-list" id="sortable">
                 {% for item in data %}
                     <li class="ui-sortable-handle" id="{{ item[1]}}">
-                        <div>{{ item[2] }}</div>
-                        <div>RemoveItem</div>
+                        <div class="ui-sortable-handle panel-item list-group-item d-flex justify-content-between lh-condensed rounded-lg my-2">{{ item[2] }}</div>
                     </li>
                     <!-- Add more attributes as needed -->
                 {% endfor %}

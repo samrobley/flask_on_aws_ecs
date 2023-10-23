@@ -1,28 +1,19 @@
 # connect to dynamodb database using local dynamodb
 
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError
-import json
-import decimal
-import time
-import datetime
+
+# create boto3 session
+session = boto3.Session(profile_name='default')
 
 # Connect to dynamodb
-dynamodb = boto3.resource('dynamodb', region_name='ap-southeast-2', endpoint_url="http://localhost:8000")
+dynamodb = session.resource('dynamodb', region_name='ap-southeast-2', endpoint_url="http://localhost:8000")
+
 
 # Create table if not exists
 def create_table():
     try:
-        # create dynamodb table
-        # fields:
-        # list_id: string
-        # item_id: string
-        # item_data: string
-        # item_order: number
-        # primary key: list_id
-        # sort key: item_order
-
         table = dynamodb.create_table(
             TableName='todo_list',
             KeySchema=[
@@ -70,16 +61,10 @@ def return_top_5(table = connect_table()):
     )
     return response['Items']
 
-def add_record(dynamodb, data):
+def add_record(db_client, data):
     # add a record to the table
-    
-    # data is shaped like this: {'id': 'item-1', 'text': 'New Item'}
-    # id is the item_id, text is the item_data
-    # id is the item_order, text is the item_data
-    # list_id = 'todo_list'
-    # dynamodb = dynamodb connection
 
-    dynamodb.put_item(
+    db_client.put_item(
         TableName='todo_list',
         Item={
             'list_id': '1',
@@ -90,5 +75,3 @@ def add_record(dynamodb, data):
     )
 
     return
-
-return_top_5()
