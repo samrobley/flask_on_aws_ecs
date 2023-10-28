@@ -1,15 +1,78 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    </head>
-    <body>
-        <div>Before panel</div>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                Test panel
-            </div>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <style>
+        /* Add custom CSS for horizontal alignment */
+        .list-group-item {
+            display: flex;
+            align-items: center;
+            padding: 0.2rem;
+            background-color: gray;
+            margin: 0.2rem;
+        }
+
+        .ellipsis-box {
+            margin-right: 10px; /* Add margin to the right of the ellipsis icon */
+            background-color: #f1f1f1; /* Light grey background color */
+            border-radius: 20%; /* Add curved edges (50% for a circle) */
+            padding: 5px; /* Add padding to increase the size */
+            width: 10%;
+            max-width: 50px;
+            justify-content: center;
+            display: flex;
+        }
+
+        /* Style for the edit icon */
+        .edit-icon {
+            margin-left: auto;
+        }
+
+        /* Custom ghost class to reduce ghosting effect */
+        .ghost {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container bg-primary p-3 d-flex justify-content-center">
+        <div class="card" style="width: 18rem">
+            <h4 class="card-header">List header</h4>
+            <ul class="list-group" id="sortable">
+                <li class="list-group-item" draggable="true">
+                    <div class="ellipsis-box">
+                        <i class="fa-solid fa-grip-vertical ellipsis-icon"></i>
+                    </div>
+                    <div>item</div>
+                    <i class="fas fa-edit edit-icon"></i>
+                </li>
+                <li class="list-group-item" draggable="true">
+                    <div class="ellipsis-box">
+                        <i class="fa-solid fa-grip-vertical ellipsis-icon"></i>
+                    </div>
+                    Test panel card text
+                    <i class="fas fa-edit edit-icon"></i>
+                </li>
+                <li class="list-group-item" draggable="true">
+                    <div class="ellipsis-box">
+                        <i class="fa-solid fa-grip-vertical ellipsis-icon"></i>
+                    </div>
+                    second panel
+                    <i class="fas fa-edit edit-icon"></i>
+                </li>
+            </ul>
         </div>
-        <div>After panel</div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    </body>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+    <script>
+        const sortable = new Sortable(document.getElementById('sortable'), {
+            handle: '.ellipsis-box', // Use the grip icon as the handle for dragging
+            animation: 300, // Adjust the animation duration (in milliseconds)
+            ghostClass: 'ghost', // Apply the custom ghost class
+        });
+    </script>
+</body>
 </html>
