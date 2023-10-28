@@ -1,14 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-import os
-# connect to the database
-import boto3
-from boto3.dynamodb.conditions import Key, Attr
-from botocore.exceptions import ClientError
-import json
-import decimal
 
 import database
-import list
 
 dynamodb = None
 
@@ -17,6 +9,11 @@ def connect():
     return database.connect_table()
 
 app = Flask(__name__)
+
+app.route("/demo")
+def demo():
+    # return templates/demo/bootstrap_demo.html
+    return render_template('demo/bootstrap_demo.html')
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
